@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  labels:
+    app: python-flask-label
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-flask-label
+  template:
+    metadata:
+      labels:
+        app: python-flask-label
+    spec:
+      containers:
+      - name: flask-app
+        image: ganesh/pythonapp
+        imagePullPolicy: Never  -- use never beacuse image is availabe locally 
+        ports:
+        - containerPort: 8000
