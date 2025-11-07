@@ -107,6 +107,7 @@ CMD ["python", "app.py"]
 ---
 
 ## 🧱 Step 4: Build Image inside Minikube
+# configuring mini kube for local docker repository pull mini kube will pull images from local docker 
 
 ```bash
 eval $(minikube docker-env)
@@ -139,7 +140,7 @@ spec:
       containers:
       - name: flask-app
         image: ganesh/pythonapp
-        imagePullPolicy: Never
+        imagePullPolicy: Never  -- use never beacuse image is availabe locally 
         ports:
         - containerPort: 8000
 ```
@@ -165,7 +166,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: python-flask-label
+    app: python-flask-label -use same label name mentioned in deployment.yml files inside pod template
   ports:
     - port: 80
       targetPort: 8000
@@ -191,6 +192,7 @@ Open in browser:
 
 ```
 http://<minikube-ip>:30007
+curl http://<nodeport-ipp>:30007
 ```
 
 Example:
